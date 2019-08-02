@@ -47,17 +47,75 @@ $(document).ready(function () {
         }
     })
 
+    let namaBulan = () => {
+        let currentDate = new Date();
+        let day = currentDate.getDate();
+        let month = currentDate.getMonth()+1;
+        let year = currentDate.getFullYear();
+        let monthName;
+        
+        //  Month
+
+        switch(month){
+            case 1:
+                monthName = "January";
+                break;
+            case 2:
+                monthName = "February";
+                break;
+            case 3:
+                monthName = "March";
+                break;
+            case 4:
+                monthName = "April";
+                break;
+            case 5:
+                monthName = "May";
+                break;
+            case 6:
+                monthName = "June";
+                break;
+            case 7:
+                monthName = "July";
+                break;
+            case 8:
+                monthName = "August";
+                break;
+            case 9:
+                monthName = "September";
+                break;
+            case 10:
+                monthName = "October";
+                break;
+            case 11:
+                monthName = "November";
+                break;
+            case 12:
+                monthName = "December";
+                break;
+        }
+
+        return day + ' ' + monthName + ' ' + year;
+    }
+
     $.ajax({
         type: "GET",
         url: "https://jsonplaceholder.typicode.com/photos",
         success: function (gallery) {
             $.each(gallery, function (i, data) {
+
+                // Jumlah Total yang ingin di tampilkan
+                let galleryTotal = 11;
+                
+                $(".gallery-total").html(galleryTotal);
+                $(".current-date").html(namaBulan);
+
                 if ($(window).width() < 992) {
                     $(".item-gallery").append('<div class="card-artikel mobile-show"><img src=" ' + gallery[i]["thumbnailUrl"] + ' " alt="' + gallery[i]["title"] + '"><div class="container-data"><h2>' + gallery[i]["title"] + '</h2><p class="hide-mobile">' + gallery[i]["title"] + '<a href="' + gallery[i]["url"] + '" target="_blank" class="hide-mobile"> read more</a></p><h6 class="hide-mobile">1 july 2019</h6></div></div>');
                 } else {
                     $(".item-gallery").append('<div class="card-artikel"><img src=" ' + gallery[i]["thumbnailUrl"] + ' " alt="' + gallery[i]["title"] + '"><div class="container-data"><h2>' + gallery[i]["title"] + '</h2><p>' + gallery[i]["title"] + '<a href="' + gallery[i]["url"] + '" target="_blank"> read more</a></p><h6>1 july 2019</h6></div></div>');
                 }
-                return i < 11;
+                return i < galleryTotal;
             });
         }
     })
