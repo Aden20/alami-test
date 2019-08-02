@@ -1,7 +1,8 @@
 $(document).ready(function () {
-    if ($(window).width() > 992) {
 
-        var $wrapperGallery = $(".item-gallery")
+    var $wrapperGallery = $(".item-gallery")
+
+    if ($(window).width() > 992) {
 
         $("#gridView").on("click", function () {
             if ($wrapperGallery.hasClass("gallery-view")) {
